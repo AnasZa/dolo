@@ -6,13 +6,12 @@ import sympy
 from dolo.compiler.function_compiler_sympy import compile_higher_order_function
 from dolo.compiler.function_compiler_sympy import ast_to_sympy
 from dolo.numeric.decision_rules_states import CDR
-from dolo.compiler.function_compiler_ast import (StandardizeDatesSimple,
-                                                 std_date_symbol)
+from dolo.compiler.symbolic import (StandardizeDatesSimple, std_tsymbol)
 
 def timeshift(expr, variables, date):
     from sympy import Symbol
-    from dolo.compiler.function_compiler_ast import std_date_symbol
-    d = {Symbol(std_date_symbol(v, 0)): Symbol(std_date_symbol(v, date))
+    from dolo.compiler.function_compiler_ast import std_tsymbol
+    d = {Symbol(std_tsymbol(v, 0)): Symbol(std_tsymbol(v, date))
          for v in variables}
     return expr.subs(d)
 
@@ -66,7 +65,7 @@ def model_to_fg(model, order=2):
 
     for k in definitions:
         v = parse_equation(definitions[k], all_dvariables + psyms, to_sympy=True)
-        kk = std_date_symbol(k, 0)
+        kk = std_tsymbol(k, 0)
         d[sympy.Symbol(kk)] = v
 
     for k in list(d.keys()):

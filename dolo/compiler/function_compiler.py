@@ -223,6 +223,7 @@ def get_deps(incidence, var, visited=None):
 
 from ast import Name, Sub, Store, Assign, Subscript, Load, Index, Num, Call
 from dolo.compiler.symbolic import eval_scalar, StandardizeDatesSimple, std_tsymbol
+from dolo.compiler.codegen import to_source
 from collections import OrderedDict
 from dolo.compiler.symbolic import match
 
@@ -242,7 +243,6 @@ def compile_function_ast(equations, symbols, arg_names, output_names=None, funna
 
     mod = make_function(equations, arguments, parameters, definitions=definitions, targets=targets, rhs_only=rhs_only, funname=funname)
 
-    from dolo.compiler.codegen import to_source
     import dolo.config
     if dolo.config.debug:
         print(to_source(mod))
@@ -313,7 +313,6 @@ def make_function(equations, arguments, parameters, targets=None, rhs_only=False
         cn.visit(val)
         defs_incidence[(sym, 0)] = cn.variables
     # return defs_incidence
-    from dolo.compiler.codegen import to_source
     equations_incidence = {}
     to_be_defined = set([])
     for i, eq in enumerate(equations):
@@ -390,7 +389,6 @@ def make_function(equations, arguments, parameters, targets=None, rhs_only=False
     from ast import arg, FunctionDef, Module
     from ast import arguments as ast_arguments
 
-    from dolo.compiler.function_compiler_ast import to_source
 
 
     f = FunctionDef(name=funname,

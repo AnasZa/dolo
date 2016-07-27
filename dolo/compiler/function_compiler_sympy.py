@@ -64,7 +64,8 @@ def compile_higher_order_function(eqs, syms, params, order=2, funname='anonymous
     return_code=False, compile=False):
     '''From a list of equations and variables, define a multivariate functions with higher order derivatives.'''
 
-    from .function_compiler_ast import std_date_symbol, StandardizeDatesSimple
+    from .symbolic import StandardizeDatesSimple
+    from .symbolic import std_tsymbol as std_date_symbol
     all_vars = syms + [(p,0) for p in params]
     sds = StandardizeDatesSimple(all_vars)
 

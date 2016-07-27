@@ -16,6 +16,7 @@ def std_tsymbol(tsymbol):
     elif date >= 0:
         return '_{}__{}_'.format(s, str(date))
 
+
 class StandardizeDatesSimple(NodeTransformer):
 
     # replaces calls to variables by time subscripts

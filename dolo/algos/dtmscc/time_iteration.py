@@ -257,27 +257,8 @@ def time_iteration(model, initial_guess=None, with_complementarities=True,
 if __name__ == '__main__':
 
     from dolo import *
-    model = yaml_import("../../../examples/models/rbc_mfga.yaml")
+    model = yaml_import("examples/models/rbc_dtmscc.yaml")
     print(model.calibration['states'])
     print(model.calibration_dict)
-    print(model.markov_chain)
-
-
-    initial_guess_symbolic = [
-        'i = delta*k',
-        'n = 0.33'
-    ]
-
-    from dolo.compiler.function_compiler_ast import compile_function_ast
-    from dolo.compiler.function_compiler import standard_function
-
-    arg_names = [
-        ['markov_states',0,'m'],
-        ['states',0,'s'],
-        ['parameters',0,'p']
-    ]
-
-    fun = compile_function_ast(initial_guess_symbolic, model.symbols, arg_names,'initial_guess')
-    ff = standard_function(fun, len(initial_guess_symbolic))
-
-    sol = time_iteration(model, initial_guess=ff)
+    
+    sol = time_iteration(model, verbose=True)

@@ -1,7 +1,7 @@
 import ast
 from collections import OrderedDict
 from .codegen import to_source
-from .function_compiler_ast import timeshift, StandardizeDatesSimple
+from .symbolic import timeshift, StandardizeDatesSimple
 from dolo.compiler.recipes import recipes
 from numba import njit
 
