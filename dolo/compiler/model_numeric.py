@@ -1,9 +1,4 @@
-import ast
-from collections import OrderedDict
-from .codegen import to_source
-from .symbolic import timeshift, StandardizeDatesSimple
 from dolo.compiler.recipes import recipes
-from numba import njit
 
 
 class NumericModel:
@@ -295,8 +290,8 @@ file: "{filename}\n'''.format(**self.infos)
 
     def __compile_functions__(self):
 
-        from dolo.compiler.function_compiler import compile_function_ast
-        from dolo.compiler.function_compiler import standard_function
+        from dolang.function_compiler import compile_function_ast
+        from dolang.function_compiler import standard_function
 
         defs = self.symbolic.definitions
 
